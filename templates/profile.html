@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chango&family=Open+Sans:wght@300&family=Pangolin&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300&family=Oswald&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Londrina+Solid&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
+<style>
+
+    
+.float-container {
+  border: 3px solid rgb(255, 166, 0);
+  padding: 20px;
+  height:10%;
+
+  }
+
+.float-child {
+    height:10%;
+    width: 60%;
+    float: left;
+    padding: 20px;
+}  
+.tab {
+  overflow: hidden;
+
+  background-image: linear-gradient(to top right,#ff971f 0%, rgb(255, 210, 126) 100%);
+  border: 1px solid rgb(255, 208, 119);
+}
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: rgb(255, 208, 119);
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  outline-style: double;
+  background-color: rgb(255, 242, 238);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 1000;
+  color:#832b15;
+}
+
+
+.tab button:hover {
+    background-color: rgb(129, 38, 10);
+    outline-style:ridge ;
+    color:#ffbe0a;
+}
+
+.tab button.active {
+    background-color: rgb(129, 38, 10);
+  color:#ffbe0a;
+}
+
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  -webkit-animation: fadeEffect 1s;
+  animation: fadeEffect 1s;
+}
+
+
+
+.details{
+    background-image: linear-gradient(to top,#f318189f 10%, #e41b00ea 100%);
+    height: 300px;
+    width: 100%;
+}
+
+/* Fade in tabs */
+@-webkit-keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+h2, p {
+  font-size: 100%;
+  font-weight: normal;
+  color:#fdfdfd
+}
+
+ul, li {
+  list-style: none;
+}
+
+ul {
+  overflow: hidden;
+  padding: 3em;
+  position:absolute;
+  left:30px;
+}
+
+ul li a {
+  text-decoration: none;
+  background: #ff9900;
+  display: block;
+  width: 100px;
+  padding: 1em;
+  /* Safari+Chrome */
+  /* Opera */
+  box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+}
+
+ul li {
+  margin: 1em;
+  float: left;
+}
+
+ul li h2 {
+  font-size: 120%;
+  color:#491009;
+  padding-bottom: 10px;
+  font-family: 'Averia Serif Libre', cursive;
+}
+
+ul li p {
+  font-family: "Reenie Beanie", arial, sans-serif;
+  font-size: 110%;
+
+}
+
+ul li:nth-child(1) a {
+  position: relative;
+  top: -10px;
+
+  height: auto;
+}
+
+
+ul li:nth-child(2) a {
+
+  position: relative;
+  top: -5px;
+
+  height: auto;
+}
+
+ul li a{
+    position: absolute;
+  right: 0;
+  top:0;
+  height: auto;
+  width:auto;
+}
+
+img.rounded {
+  object-fit: cover;
+  border-radius: 50%;
+  position: absolute;
+  right:5%;
+  top:17%;
+}
+ul li:nth-child(3) a {
+  position: relative;
+  top: -10px;
+  height: auto;
+}
+ul li:nth-child(5) a {
+  position: relative;
+  top: -10px;
+  height:auto;
+  
+}
+
+ul li:nth-child(4) a {
+  position: relative;
+  top: -10px;
+  height: auto;
+ 
+}
+.namediv{
+    text-decoration: none;
+    position: absolute;
+  background: rgb(110, 12, 12);
+  display: block;
+  width: auto;
+  right:10%;
+  top: 50%;
+  height:auto;
+  padding: 1em;
+  font-weight: bolder;
+  /* Safari+Chrome */
+  /* Opera */
+  color:#fffcf7e8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  box-shadow: 5px 5px 7px rgb(0,0,0);
+      transform: rotate(2deg);
+}
+
+.biased{
+    text-decoration: none;
+  background: #faead3;
+  display: block;
+  width: 100px;
+  padding: 1em;
+  height: auto;
+  /* Safari+Chrome */
+  /* Opera */
+  box-shadow: 5px 5px 7px rgba(65, 5, 5, 0.7);
+  transform: rotate(4deg);
+  position:absolute ;
+
+  right:5%; 
+  bottom:20%;
+}
+.biased h2{
+    color:#410b0b;
+    font-family: 'Indie Flower', cursive;
+    font-weight: 1000;
+    font-size: x-large;
+}
+.biased p{
+    color:#ff9b3d;
+    font-size: larger;
+    font-weight: 800;
+    font-family: 'Indie Flower', cursive;
+
+}
+
+
+
+ header{
+ 
+    background-color: #aa0f0fea;
+     top:0px;
+     z-index: 100;
+     position:sticky;
+ }
+
+
+header h1{
+    font-family: 'Libre Baskerville', serif;;
+    font-weight: bolder;
+    text-align:center;
+    font-size: 60px;
+    color:#fdfdfd;
+    top:15px;
+    left: 23%;
+    
+    position:absolute;
+    z-index: 100;
+}
+.logo{
+    z-index: 5;
+    width:7%;
+    height: 5%;
+
+}
+
+
+</style>
+    </head>
+    <body>
+        <header>
+          <a href="javascript:history.back()">
+            <img src="../static/wellsfargo.png" class="logo">
+            </a>
+            <h1 >EMPLOYEE PROFILE</h1>
+            
+        </header> 
+    <div class="details">
+        
+        <div class = "namediv">
+            {{name}}
+        </div>
+        <ul>
+            <li>
+                <a href="#">
+                <h2>Employee ID:</h2>
+                <p>{{Emp_id}}</p>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                <h2>UserId:</h2>
+                <p>{{uid}}</p>
+                </a>
+            </li>
+
+            
+            
+            
+            <li>
+                <a href="#">
+                <h2>Line:</h2>
+                <p>{{lm}}</p>
+                </a>
+            </li>    
+            
+            <li>
+                <a href="#">
+                <h2>Date of joining:</h2>
+                <p>{{doj}}</p>
+                </a>
+            </li> 
+            <li>
+                <a href="#">
+                <h2>Category:</h2>
+                <p> {{cat}}</p>
+                </a>
+            </li>  
+            
+        </ul>
+
+        
+                <a href="../static/user-image.png" target="_blank" rel="noopener noreferrer">
+                    <img src="../static/user-image.png", class='rounded', style="width:200px;height: 200px;">
+                </a>   
+   
+    </div>
+        <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'Overall analysis')">Overall analysis</button>
+            <button class="tablinks" onclick="openCity(event, 'Category analysis')">Category analysis</button>
+            <button class="tablinks" onclick="openCity(event, 'Git and Jira')">Git and Jira</button>
+          </div>
+
+        <div id="Overall analysis" class="tabcontent">
+            <div class="float-child">
+            <canvas id="gitcateg"></canvas>
+        </div>
+            
+            <div class="float-child">
+                <div class="biased"><h2>Overall biased :</h2>
+                    <p>{{ovbias}}</p>
+                    </div>
+            <canvas id="gitoverall"></canvas>
+        </div>
+        
+        </div>
+
+        <div id="Category analysis" class="tabcontent">
+                <div class="float-child">   
+                <canvas id="gitsamecat"></canvas>
+                
+                </div> 
+            <div class="float-child">
+                <div class="biased"><h2>Category biased :</h2>
+                <p>{{catbias}}</p>
+                </div>
+                <canvas id="endyearsamecat" style="float: left;"></canvas>
+                </div>
+            </div>
+        </div>
+                    
+
+
+        <div id="Git and Jira" class="tabcontent">
+            
+                <div class="float-child">
+                    <div class= "gitChart"><canvas id="gitChart"></canvas>
+                </div>
+                </div>
+                <div class="float-child">
+                    <div class="biased"><h2>Rating:</h2>
+                        <p>{{rating}}</p>
+                        </div>
+                    <div class= "jiraChart"><canvas id="jiraChart"></canvas>
+                </div>
+                </div>
+
+            
+        </div>
+
+        
+          <script>
+
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+            let gitcateg = document.getElementById('gitcateg').getContext('2d');
+     
+     // Global Options
+     Chart.defaults.global.defaultFontFamily = 'Lato';
+     Chart.defaults.global.defaultFontSize = 18;
+     Chart.defaults.global.defaultFontColor = '#777';
+     let midChart = new Chart(gitcateg, {
+       type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+       data:{
+         datasets: [ {
+               label: "Employee's check-ins",
+               data: [30,30, 30, 30, 30, 30, 30],
+               backgroundColor: 'rgb(253, 167, 47)',
+               fill:false,
+               type: 'line'
+             },
+             {
+               label: 'category wise average',
+               data: [10, 20, 30, 40, 50, 60],
+               backgroundColor:
+                 'rgb(136, 9, 9)',
+             },
+            ],
+         labels: ['Analyst', 'Associate', 'Software Engineer',
+            'Software Senior Engineer', 'Software Engineer Specialty',
+            'Software Senior Engineer Specialty']
+       },
+       options:{
+         scales: {
+             yAxes: [{
+                 ticks: {
+                     beginAtZero: true
+                 }
+             }]
+         },
+         title:{
+           display:true,
+           text:'AVERAGE CATEGORY WISE CHECK INS',
+           fontSize:25
+         },
+         legend:{
+           display:true,
+           position:'right',
+           labels:{
+             fontColor:'#000'
+           }
+         },
+         tooltips:{
+           enabled:true
+         }
+       }
+     });
+     
+     let gitsamecat = document.getElementById('gitsamecat').getContext('2d');
+     
+     // Global Options
+     Chart.defaults.global.defaultFontFamily = 'Lato';
+     Chart.defaults.global.defaultFontSize = 18;
+     Chart.defaults.global.defaultFontColor = '#777';
+     labelv = JSON.parse({{ users | tojson }});
+     gits = JSON.parse({{ git | tojson }});
+     userd = JSON.parse({{ usergit | tojson }});
+     console.log(userd);
+     let endChart = new Chart(gitsamecat, {
+       type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+       data:{
+         datasets: [ {
+               label: 'employee check-ins',
+               data: userd,//[108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495],
+               fill:false,
+               backgroundColor: 'rgb(253, 167, 47)',
+               type: 'line'
+             },
+             {
+               label: "colleague's check-ins",
+               data: gits,//[495.0, 2655.0, 3015.0, 5175.0, 5535.0, 7695.0, 8055.0, 10215.0, 10575.0, 12735.0, 13095.0, 15255.0, 15615.0, 17775.0, 18135.0, 20295.0, 20655.0, 22815.0, 23175.0, 25335.0, 25695.0, 27855.0, 28215.0, 30375.0, 30735.0, 32895.0, 33255.0, 35415.0, 35775.0, 37935.0, 38295.0, 40455.0, 40815.0, 42975.0, 43335.0, 45495.0, 45855.0, 48015.0, 48375.0, 50535.0, 50895.0, 53055.0, 53415.0, 55575.0, 55935.0, 58095.0, 58455.0, 60615.0, 60975.0, 63135.0, 63495.0, 65655.0, 66015.0, 68175.0, 68535.0, 70695.0, 71055.0, 73215.0, 73575.0, 75735.0, 76095.0, 78255.0, 78615.0, 80775.0, 81135.0, 83295.0, 83655.0, 85815.0, 86175.0, 88335.0, 88695.0, 90855.0, 91215.0, 93375.0, 93735.0, 95895.0, 96255.0, 98415.0, 98775.0, 100935.0, 101295.0, 103455.0, 103815.0, 105975.0, 106335.0, 108495.0, 108855.0, 111015.0, 111375.0, 113535.0, 113895.0, 116055.0, 116415.0, 118575.0, 118935.0, 121095.0, 121455.0, 123615.0, 123975.0, 126135.0, 126495.0, 128655.0, 129015.0, 131175.0, 131535.0, 133695.0, 134055.0, 136215.0, 136575.0, 138735.0, 139095.0, 141255.0, 141615.0, 143775.0, 144135.0, 146295.0, 146655.0, 148815.0, 149175.0, 151335.0, 151695.0, 153855.0, 154215.0, 156375.0, 156735.0, 158895.0, 159255.0, 161415.0, 161775.0, 163935.0, 164295.0, 166455.0, 166815.0, 168975.0, 169335.0, 171495.0, 171855.0, 174015.0, 174375.0, 176535.0, 176895.0, 179055.0, 179415.0],
+               backgroundColor: 'rgb(136, 9, 9)'
+             },
+            ],
+         labels: labelv//['U1234', 'U1246', 'U1248', 'U1260', 'U1262', 'U1274', 'U1276', 'U1288', 'U1290', 'U1302', 'U1304', 'U1316', 'U1318', 'U1330', 'U1332', 'U1344', 'U1346', 'U1358', 'U1360', 'U1372', 'U1374', 'U1386', 'U1388', 'U1400', 'U1402', 'U1414', 'U1416', 'U1428', 'U1430', 'U1442', 'U1444', 'U1456', 'U1458', 'U1470', 'U1472', 'U1484', 'U1486', 'U1498', 'U1500', 'U1512', 'U1514', 'U1526', 'U1528', 'U1540', 'U1542', 'U1554', 'U1556', 'U1568', 'U1570', 'U1582', 'U1584', 'U1596', 'U1598', 'U1610', 'U1612', 'U1624', 'U1626', 'U1638', 'U1640', 'U1652', 'U1654', 'U1666', 'U1668', 'U1680', 'U1682', 'U1694', 'U1696', 'U1708', 'U1710', 'U1722', 'U1724', 'U1736', 'U1738', 'U1750', 'U1752', 'U1764', 'U1766', 'U1778', 'U1780', 'U1792', 'U1794', 'U1806', 'U1808', 'U1820', 'U1822', 'U1834', 'U1836', 'U1848', 'U1850', 'U1862', 'U1864', 'U1876', 'U1878', 'U1890', 'U1892', 'U1904', 'U1906', 'U1918', 'U1920', 'U1932', 'U1934', 'U1946', 'U1948', 'U1960', 'U1962', 'U1974', 'U1976', 'U1988', 'U1990', 'U2002', 'U2004', 'U2016', 'U2018', 'U2030', 'U2032', 'U2044', 'U2046', 'U2058', 'U2060', 'U2072', 'U2074', 'U2086', 'U2088', 'U2100', 'U2102', 'U2114', 'U2116', 'U2128', 'U2130', 'U2142', 'U2144', 'U2156', 'U2158', 'U2170', 'U2172', 'U2184', 'U2186', 'U2198', 'U2200', 'U2212', 'U2214', 'U2226', 'U2228']
+       },
+       options:{
+         scales: {
+             yAxes: [{
+                 ticks: {
+                     beginAtZero: true
+                 }
+             }]
+         },
+         title:{
+           display:true,
+           text:'COLLEAGUE GIT CHECK IN COMPARISON',
+           fontSize:25
+         },
+         legend:{
+           display:true,
+           position:'right',
+           labels:{
+             fontColor:'#000'
+           }
+         },
+         tooltips:{
+           enabled:true
+         }
+       }
+     });
+
+
+
+     let gitoverall = document.getElementById('gitoverall').getContext('2d');
+     
+     // Global Options
+     Chart.defaults.global.defaultFontFamily = 'Lato';
+     Chart.defaults.global.defaultFontSize = 18;
+     Chart.defaults.global.defaultFontColor = '#777';
+
+     let gitoverll = new Chart(gitoverall, {
+       type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+       data:{
+         datasets: [ {
+               label: "Employee's check-ins",
+               data: [108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495],
+               fill:false,
+               backgroundColor: 'rgb(253, 167, 47)',
+               type: 'line'
+             },
+             {
+               label: "Other employees",
+               data: [495.0, 2655.0, 3015.0, 5175.0, 5535.0, 7695.0, 8055.0, 10215.0, 10575.0, 12735.0, 13095.0, 15255.0, 15615.0, 17775.0, 18135.0, 20295.0, 20655.0, 22815.0, 23175.0, 25335.0, 25695.0, 27855.0, 28215.0, 30375.0, 30735.0, 32895.0, 33255.0, 35415.0, 35775.0, 37935.0, 38295.0, 40455.0, 40815.0, 42975.0, 43335.0, 45495.0, 45855.0, 48015.0, 48375.0, 50535.0, 50895.0, 53055.0, 53415.0, 55575.0, 55935.0, 58095.0, 58455.0, 60615.0, 60975.0, 63135.0, 63495.0, 65655.0, 66015.0, 68175.0, 68535.0, 70695.0, 71055.0, 73215.0, 73575.0, 75735.0, 76095.0, 78255.0, 78615.0, 80775.0, 81135.0, 83295.0, 83655.0, 85815.0, 86175.0, 88335.0, 88695.0, 90855.0, 91215.0, 93375.0, 93735.0, 95895.0, 96255.0, 98415.0, 98775.0, 100935.0, 101295.0, 103455.0, 103815.0, 105975.0, 106335.0, 108495.0, 108855.0, 111015.0, 111375.0, 113535.0, 113895.0, 116055.0, 116415.0, 118575.0, 118935.0, 121095.0, 121455.0, 123615.0, 123975.0, 126135.0, 126495.0, 128655.0, 129015.0, 131175.0, 131535.0, 133695.0, 134055.0, 136215.0, 136575.0, 138735.0, 139095.0, 141255.0, 141615.0, 143775.0, 144135.0, 146295.0, 146655.0, 148815.0, 149175.0, 151335.0, 151695.0, 153855.0, 154215.0, 156375.0, 156735.0, 158895.0, 159255.0, 161415.0, 161775.0, 163935.0, 164295.0, 166455.0, 166815.0, 168975.0, 169335.0, 171495.0, 171855.0, 174015.0, 174375.0, 176535.0, 176895.0, 179055.0, 179415.0],
+               backgroundColor: 'rgb(136, 9, 9)'
+             }],
+         labels: ['U1234', 'U1246', 'U1248', 'U1260', 'U1262', 'U1274', 'U1276', 'U1288', 'U1290', 'U1302', 'U1304', 'U1316', 'U1318', 'U1330', 'U1332', 'U1344', 'U1346', 'U1358', 'U1360', 'U1372', 'U1374', 'U1386', 'U1388', 'U1400', 'U1402', 'U1414', 'U1416', 'U1428', 'U1430', 'U1442', 'U1444', 'U1456', 'U1458', 'U1470', 'U1472', 'U1484', 'U1486', 'U1498', 'U1500', 'U1512', 'U1514', 'U1526', 'U1528', 'U1540', 'U1542', 'U1554', 'U1556', 'U1568', 'U1570', 'U1582', 'U1584', 'U1596', 'U1598', 'U1610', 'U1612', 'U1624', 'U1626', 'U1638', 'U1640', 'U1652', 'U1654', 'U1666', 'U1668', 'U1680', 'U1682', 'U1694', 'U1696', 'U1708', 'U1710', 'U1722', 'U1724', 'U1736', 'U1738', 'U1750', 'U1752', 'U1764', 'U1766', 'U1778', 'U1780', 'U1792', 'U1794', 'U1806', 'U1808', 'U1820', 'U1822', 'U1834', 'U1836', 'U1848', 'U1850', 'U1862', 'U1864', 'U1876', 'U1878', 'U1890', 'U1892', 'U1904', 'U1906', 'U1918', 'U1920', 'U1932', 'U1934', 'U1946', 'U1948', 'U1960', 'U1962', 'U1974', 'U1976', 'U1988', 'U1990', 'U2002', 'U2004', 'U2016', 'U2018', 'U2030', 'U2032', 'U2044', 'U2046', 'U2058', 'U2060', 'U2072', 'U2074', 'U2086', 'U2088', 'U2100', 'U2102', 'U2114', 'U2116', 'U2128', 'U2130', 'U2142', 'U2144', 'U2156', 'U2158', 'U2170', 'U2172', 'U2184', 'U2186', 'U2198', 'U2200', 'U2212', 'U2214', 'U2226', 'U2228']
+       },
+       options:{
+         scales: {
+             yAxes: [{
+                 ticks: {
+                     beginAtZero: true
+                 }
+             }]
+         },
+         title:{
+           display:true,
+           text:'OVERALL GIT CHECK-IN COMPARISON',
+           fontSize:25
+         },
+         legend:{
+           display:true,
+           position:'right',
+           labels:{
+             fontColor:'#000'
+           }
+         },
+         tooltips:{
+           enabled:true
+         }
+       }
+     });
+
+     let gitChart = document.getElementById('gitChart').getContext('2d');
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+    gitdata = JSON.parse({{ gitd | tojson }});
+    let gitcChart = new Chart(gitChart, {
+      type:'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug',
+       'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets:[{
+          label:'git check-ins',
+          data:gitdata,//[10,20,100,110,30,70,80,90 ,40,50,60,120],
+          fill:true,
+          borderWidth:1,
+          borderColor:'rgb(65, 250, 19)',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        scaleShowValues: true,
+        scales: {
+            xaxis:[{
+                ticks:{
+                    autoskip:false
+                }
+            }]
+        },
+        title:{
+          display:false,
+          text:'End-year analysis',
+          fontSize:25
+        },
+
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+
+    let jiraChart = document.getElementById('jiraChart').getContext('2d');
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+    jdata = JSON.parse({{ jira | tojson }});
+    storyp = JSON.parse({{ sp | tojson }});
+    let jiracChart = new Chart(jiraChart, {
+      type:'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug',
+       'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets:[{
+          label:'Jira Count',
+          data:jdata,//[45,60,20,80,30,70,80,20 ,90,10,160,80],
+          fill:true,
+          borderWidth:1,
+          borderColor:'rgb(72, 250, 220)',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        },
+        {
+          label:'Story points',
+          data:storyp,//[30,80,10,20,45,50,19,10 ,30,110,60,20],
+          fill:true,
+          borderWidth:1,
+          borderColor:'rgb(135, 250, 190)',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+          
+        }
+    ]
+      },
+      options:{
+        scaleShowValues: true,
+        scales: {
+            xaxis:[{
+                ticks:{
+                    autoskip:false
+                }
+            }]
+        },
+        title:{
+          display:false,
+          text:'End-year analysis',
+          fontSize:25
+        },
+
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+
+    let endyearsamecat = document.getElementById('endyearsamecat').getContext('2d');
+     
+     // Global Options
+     Chart.defaults.global.defaultFontFamily = 'Lato';
+     Chart.defaults.global.defaultFontSize = 18;
+     Chart.defaults.global.defaultFontColor = '#777';
+
+     labelv = JSON.parse({{ users | tojson }});
+     ratings = JSON.parse({{ end | tojson }});
+     userd = JSON.parse({{ userend | tojson }});
+
+     console.log(userd);
+     console.log(ratings);
+     let endsameChart = new Chart(endyearsamecat, {
+       type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+       data:{
+         datasets: [ {
+               label: 'employee end year rating',
+               data: ratings,//[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+               fill:false,
+               backgroundColor: 'rgb(253, 167, 47)'
+               
+             },
+             {
+               label: 'end year rating',
+               data: userd,//[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+               backgroundColor:
+                 'rgb(136, 9, 9)',
+                 type: 'line',
+                 fill: false
+             },],
+         labels: labelv//['U1234', 'U1246', 'U1248', 'U1260', 'U1262', 'U1274', 'U1276', 'U1288', 'U1290', 'U1302', 'U1304', 'U1316', 'U1318', 'U1330', 'U1332', 'U1344', 'U1346', 'U1358', 'U1360', 'U1372', 'U1374', 'U1386', 'U1388', 'U1400', 'U1402', 'U1414', 'U1416', 'U1428', 'U1430', 'U1442', 'U1444', 'U1456', 'U1458', 'U1470', 'U1472', 'U1484', 'U1486', 'U1498', 'U1500', 'U1512', 'U1514', 'U1526', 'U1528', 'U1540', 'U1542', 'U1554', 'U1556', 'U1568', 'U1570', 'U1582', 'U1584', 'U1596', 'U1598', 'U1610', 'U1612', 'U1624', 'U1626', 'U1638', 'U1640', 'U1652', 'U1654', 'U1666', 'U1668', 'U1680', 'U1682', 'U1694', 'U1696', 'U1708', 'U1710', 'U1722', 'U1724', 'U1736', 'U1738', 'U1750', 'U1752', 'U1764', 'U1766', 'U1778', 'U1780', 'U1792', 'U1794', 'U1806', 'U1808', 'U1820', 'U1822', 'U1834', 'U1836', 'U1848', 'U1850', 'U1862', 'U1864', 'U1876', 'U1878', 'U1890', 'U1892', 'U1904', 'U1906', 'U1918', 'U1920', 'U1932', 'U1934', 'U1946', 'U1948', 'U1960', 'U1962', 'U1974', 'U1976', 'U1988', 'U1990', 'U2002', 'U2004', 'U2016', 'U2018', 'U2030', 'U2032', 'U2044', 'U2046', 'U2058', 'U2060', 'U2072', 'U2074', 'U2086', 'U2088', 'U2100', 'U2102', 'U2114', 'U2116', 'U2128', 'U2130', 'U2142', 'U2144', 'U2156', 'U2158', 'U2170', 'U2172', 'U2184', 'U2186', 'U2198', 'U2200', 'U2212', 'U2214', 'U2226', 'U2228']
+       },
+       options:{
+         scales: {
+             yAxes: [{
+                 ticks: {
+                     beginAtZero: true
+                 }
+             }]
+         },
+         title:{
+           display:true,
+           text:'END YEAR RATING',
+           fontSize:25
+         },
+         legend:{
+           display:true,
+           position:'right',
+           labels:{
+             fontColor:'#000'
+           }
+         },
+         tooltips:{
+           enabled:true
+         }
+       }
+     });
+
+
+     
+        </script>
+     
+    </body>
+   
+</html>

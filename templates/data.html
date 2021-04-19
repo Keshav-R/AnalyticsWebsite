@@ -1,0 +1,1940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Chango&family=Open+Sans:wght@300&family=Pangolin&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300&family=Oswald&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <title>My Chart.js Chart</title>
+  <style>
+    .float-container {
+    border: 3px solid #fff;
+    padding: 20px;
+    height:10%;
+}
+.float-child {
+    height:5%;
+    width: 50%;
+    float: left;
+    padding: 20px;
+}  
+
+body {font-family: Arial;}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+
+  background-image: linear-gradient(to top right,#ff971f 0%, rgb(255, 210, 126) 100%);
+  border: 1px solid rgb(255, 208, 119);
+}
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: rgb(255, 208, 119);
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  outline-style: double;
+  background-color: rgb(255, 242, 238);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 1000;
+  color:#832b15;
+}
+
+
+.tab button:hover {
+    background-color: rgb(129, 38, 10);
+    outline-style:ridge ;
+    color:#ffbe0a;
+}
+
+.tab button.active {
+    background-color: rgb(129, 38, 10);
+  color:#ffbe0a;
+}
+
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  -webkit-animation: fadeEffect 1s;
+  animation: fadeEffect 1s;
+}
+
+/* Fade in tabs */
+@-webkit-keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+/* Zebra striping */
+tr:nth-of-type(odd) {
+  background: #ffa35d;
+}
+th {
+  background: rgb(119, 28, 0);
+  color: white;
+  font-weight: bold;
+}
+th:after {
+  content: '\2605';
+}
+th:after {
+  margin-left: 10px;
+}
+td,
+th {
+  padding: 6px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* Force table to not be like tables anymore */
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  tr {
+    border: 1px solid rgba(255, 160, 82, 0.795);
+  }
+  td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+  td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+}
+td:first-of-type {
+  font-weight: bold;
+}
+
+header{
+    background-image: linear-gradient(to top,#e7b11ba1 10%, #ff1e00ea 100%);
+}
+header h1{
+    font-family: 'Garamond';
+    text-align:center;
+    font-size: 30px;
+    font-weight: bold;
+    color:#e9e9e9;
+    top:15px;
+    left:35%;
+    float:right;
+    position:absolute;
+    border-width: 2px;
+    background-color: white;
+    background:transparent;
+}
+.logo{
+    
+    width:7%;
+    height: 5%;
+
+}
+
+  </style>  
+</head>
+
+<body>
+    <header>
+        <a href="https://www.bruh.com">
+        <img src="../static/wellsfargo.png" class="logo">
+        </a>
+        <h1 >EMPLOYEE ANALYTICS TOOL</h1>
+        
+    </header>
+    <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'Overall')">Overall</button>
+        <button class="tablinks" onclick="openCity(event, 'Analyst')">Analyst</button>
+        <button class="tablinks" onclick="openCity(event, 'Associate')">Associate</button>
+        <button class="tablinks" onclick="openCity(event, 'Software Engineer')">Software Engineer</button>
+        <button class="tablinks" onclick="openCity(event, 'Software Senior Engineer')">Software Senior Engineer</button>
+        <button class="tablinks" onclick="openCity(event, 'Software Engineer Specialty')">Software Engineer Specialty</button>
+        <button class="tablinks" onclick="openCity(event, 'Software Senior Engineer Specialty')">Software Senior Engineer Specialty</button>
+        
+      </div>
+
+      <div id="Overall" class="tabcontent">
+            <div class="float-container">
+
+            <div class="float-child">
+              <div class="midyearcontainer">
+                <canvas id="midyearChart"></canvas>
+              </div>
+            </div>
+            
+            <div class="float-child">
+            <div class="endyearcontainer">
+              <canvas id="endyearChart"></canvas>
+            </div>
+            </div>
+            
+            </div>
+
+
+            <div class="float-container">
+          
+            <div class="float-child">
+            <div class="midyearPie">
+                <canvas id="midyearPie"></canvas>
+            </div>
+            </div>
+            <div class="float-child">
+                <div class="endyearPie">
+                    <canvas id="endyearPie"></canvas>
+                </div>
+            </div>
+            </div>
+
+            <div class="float-container">
+          
+                <div class="float-child">
+                <div class="categgit">
+                    <canvas id="categgit"></canvas>
+                </div>
+                </div>
+                <div class="float-child">
+                    <div class="ratinggitchart">
+                        <canvas id="ratinggitchart"></canvas>
+                    </div>
+                </div>
+                </div>
+
+      </div>
+      
+        <div id="Analyst" class="tabcontent">
+            <div class="float-container">
+
+                <div class="float-child">
+                  <div class="analyst_rwg">
+                    <canvas id="analyst_rwg_chart"></canvas>
+                  </div>
+                </div>
+                
+                <div class="float-child">
+                <div class="analyst_rwc">
+                  <canvas id="analyst_rwc_chart"></canvas>
+                </div>
+                </div>
+                
+                </div>
+            {% for table in analysttables %}
+            {{ table|safe }}
+            {% endfor %}
+        </div>
+      
+        <div id="Associate" class="tabcontent">
+          <div class="float-container">
+
+              <div class="float-child">
+                <div class="associate_rwg">
+                  <canvas id="associate_rwg_chart"></canvas>
+                </div>
+              </div>
+              
+              <div class="float-child">
+              <div class="associate_rwc">
+                <canvas id="associate_rwc_chart"></canvas>
+              </div>
+              </div>
+              
+              </div>
+          {% for table in associatetables %}
+          {{ table|safe }}
+          {% endfor %}
+      </div>
+
+      <div id="Software Engineer" class="tabcontent">
+        <div class="float-container">
+
+          <div class="float-child">
+            <div class="SE_rwg">
+              <canvas id="SE_rwg_chart"></canvas>
+            </div>
+          </div>
+          
+          <div class="float-child">
+          <div class="SE_rwc">
+            <canvas id="SE_rwc_chart"></canvas>
+          </div>
+          </div>
+          
+          </div>
+      {% for table in SEtables %}
+      {{ table|safe }}
+      {% endfor %}
+  </div>
+
+      <div id="Software Senior Engineer" class="tabcontent">
+        <div class="float-container">
+
+          <div class="float-child">
+            <div class="SSE_rwg">
+              <canvas id="SSE_rwg_chart"></canvas>
+            </div>
+          </div>
+          
+          <div class="float-child">
+          <div class="SSE_rwc">
+            <canvas id="SSE_rwc_chart"></canvas>
+          </div>
+          </div>
+          
+          </div>
+      {% for table in SSEtables %}
+      {{ table|safe }}
+      {% endfor %}
+  </div>
+
+      <div id="Software Engineer Specialty" class="tabcontent">
+        <div class="float-container">
+
+          <div class="float-child">
+            <div class="SES_rwg">
+              <canvas id="SES_rwg_chart"></canvas>
+            </div>
+          </div>
+          
+          <div class="float-child">
+          <div class="SES_rwc">
+            <canvas id="SES_rwc_chart"></canvas>
+          </div>
+          </div>
+          
+          </div>
+      {% for table in SEStables %}
+      {{ table|safe }}
+      {% endfor %}
+  </div>
+
+      <div id="Software Senior Engineer Specialty" class="tabcontent">
+        <div class="float-container">
+
+          <div class="float-child">
+            <div class="SESS_rwg">
+              <canvas id="SESS_rwg_chart"></canvas>
+            </div>
+          </div>
+          
+          <div class="float-child">
+          <div class="SESS_rwc">
+            <canvas id="SESS_rwc_chart"></canvas>
+          </div>
+          </div>
+          
+          </div>
+      {% for table in SESStables %}
+      {{ table|safe }}
+      {% endfor %}
+  </div>
+
+
+  <script>
+    let midyearChart = document.getElementById('midyearChart').getContext('2d');
+
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = 'rgb(255, 166, 0)';
+    labelv = JSON.parse({{ jobs | tojson }})
+    datav = JSON.parse({{ endavg | tojson }})
+    console.log(labelv)
+    console.log(datav)
+    let midyrChart = new Chart(midyearChart, {
+      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels: labelv,
+        datasets:[{
+          label:'category wise average performance',
+          data:datav,
+          backgroundColor:
+            'rgb(82, 5, 3)',
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        scaleShowValues: true,
+        scales: {
+            xaxis:[{
+                ticks:{
+                    autoskip:false
+                }
+            }]
+        },
+        title:{
+          display:true,
+          text:'Mid-year analysis',
+          fontSize:25,
+          defaultFontColor:'rgb(255, 166, 0)'
+        },
+
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+
+    let endyearChart = document.getElementById('endyearChart').getContext('2d');
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+    labelv = JSON.parse({{ jobs | tojson }})
+    datav = JSON.parse({{ endavg | tojson }})
+    console.log(labelv)
+    console.log(datav)
+    let endyrChart = new Chart(endyearChart, {
+      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels: labelv,
+        datasets:[{
+          label:'category wise average performance',
+          data:datav,
+          backgroundColor:'rgb(82, 5, 3)',
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        scaleShowValues: true,
+        scales: {
+            xaxis:[{
+                ticks:{
+                    autoskip:false
+                }
+            }]
+        },
+        title:{
+          display:true,
+          text:'End-year analysis',
+          fontSize:25
+        },
+
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+  
+    let midyearPie = document.getElementById('midyearPie').getContext('2d');
+
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+    labelv = JSON.parse({{ jobs | tojson }})
+    datav = JSON.parse({{ midsum | tojson }})
+    console.log(labelv)
+    console.log(datav)
+    let midyrPie = new Chart(midyearPie, {
+      type:'radar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels: labelv,
+        datasets:[{
+          label:'category wise average performance',
+          data:datav,
+          backgroundColor:'rgb(82, 5, 3)',
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        title:{     
+          display:true,
+          text:'Mid-year analysis',
+          fontSize:25
+        },
+
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+
+
+    let endyearPie = document.getElementById('endyearPie').getContext('2d');
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+    labelv = JSON.parse({{ jobs | tojson }})
+    datav = JSON.parse({{ endsum | tojson }})
+    console.log(labelv)
+    console.log(datav)
+    let endyrPie = new Chart(endyearPie, {
+      type:'doughnut', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels: labelv,
+        datasets:[{
+          label:'End-year category wise performance',
+          data:datav,
+          backgroundColor:[
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)'
+          ],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        title:{
+          display:true,
+          text:'End year analysis',
+          fontSize:25
+        },
+
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+
+    let categgit = document.getElementById('categgit').getContext('2d');
+
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+    labelv = JSON.parse({{ jobs | tojson }})
+    datav = JSON.parse({{ categgit | tojson }})
+    console.log(labelv)
+    console.log(datav)
+    let categgitChart = new Chart(categgit, {
+      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels: labelv,
+        datasets:[{
+          label:'Average git check-ins',
+          data:datav,
+          backgroundColor:'rgb(109, 2, 2)',
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        scaleShowValues: true,
+        scales: {
+            xaxis:[{
+                ticks:{
+                    autoskip:false
+                }
+            }]
+        },
+        title:{
+          display:true,
+          text:'CATEGORY WISE',
+          fontSize:25
+        },
+
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+
+
+    let ratinggitchart = document.getElementById('ratinggitchart').getContext('2d');
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+    labelv = JSON.parse({{ ratinglabels | tojson }})
+    datav = JSON.parse({{ ratinggit | tojson }})
+    console.log(labelv)
+    console.log(datav)
+    let ratingChart = new Chart(ratinggitchart, {
+      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels: labelv,
+        datasets:[{
+          label:'Average git check-ins',
+          data:datav,
+          backgroundColor:'rgb(109, 2, 2)',
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        scaleShowValues: true,
+        scales: {
+            xaxis:[{
+                ticks:{
+                    autoskip:false
+                }
+            }]
+        },
+        title:{
+          display:true,
+          text:'RATING WISE',
+          fontSize:25
+        },
+
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+
+    let analyst_rwc_chart = document.getElementById('analyst_rwc_chart').getContext('2d');
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+    labelv = JSON.parse({{ ratinglabels | tojson }})
+    datav = JSON.parse({{ analyst_rwc | tojson }})
+    console.log(labelv)
+    console.log(datav)
+    let analyst_rwc_var = new Chart(analyst_rwc_chart, {
+      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels: labelv,
+        datasets:[{
+          label:'No. of employees',
+          data:datav,
+          backgroundColor:[
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)'
+          ],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        scaleShowValues: true,
+        scales: {
+            xaxis:[{
+                ticks:{
+                    autoskip:false
+                }
+            }]
+        },
+        title:{
+          display:true,
+          text:'END-YEAR',
+          fontSize:25
+        },
+
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+    
+    let analyst_rwg_chart = document.getElementById('analyst_rwg_chart').getContext('2d');
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+    labelv = JSON.parse({{ ratinglabels | tojson }})
+    datav = JSON.parse({{ analyst_rwg | tojson }})
+    console.log(labelv)
+    console.log(datav)
+    let analyst_rwg_var = new Chart(analyst_rwg_chart, {
+      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels: labelv,
+        datasets:[{
+          label:'Average git count',
+          data:datav,
+          backgroundColor:[
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)'
+          ],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        scaleShowValues: true,
+        scales: {
+            xaxis:[{
+                ticks:{
+                    autoskip:false
+                    
+                }
+            }],
+             yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+        },
+        title:{
+          display:true,
+          text:'RATING WISE',
+          fontSize:25
+        },
+
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+
+    let associate_rwc_chart = document.getElementById('associate_rwc_chart').getContext('2d');
+    labelv = JSON.parse({{ ratinglabels | tojson }})
+    datav = JSON.parse({{ associate_rwc | tojson }})
+    console.log(labelv)
+    console.log(datav)
+    let associate_rwc_var = new Chart(associate_rwc_chart, {
+      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels: labelv,
+        datasets:[{
+          label:'No. of employees',
+          data:datav,
+          backgroundColor:[
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)'
+          ],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        scaleShowValues: true,
+        scales: {
+            xaxis:[{
+                ticks:{
+                    autoskip:false
+                }
+            }]
+        },
+        title:{
+          display:true,
+          text:'END-YEAR',
+          fontSize:25
+        },
+
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+    
+    let associate_rwg_chart = document.getElementById('associate_rwg_chart').getContext('2d');
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+    labelv = JSON.parse({{ ratinglabels | tojson }})
+    datav = JSON.parse({{ associate_rwg | tojson }})
+    console.log(labelv)
+    console.log(datav)
+    let associate_rwg_var = new Chart(associate_rwg_chart, {
+      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels: labelv,
+        datasets:[{
+          label:'Average git count',
+          data:datav,
+          backgroundColor:[
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)'
+          ],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        scaleShowValues: true,
+        scales: {
+            xaxis:[{
+                ticks:{
+                    autoskip:false
+                    
+                }
+            }],
+             yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+        },
+        title:{
+          display:true,
+          text:'RATING WISE',
+          fontSize:25
+        },
+
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+
+
+    let SE_rwc_chart = document.getElementById('SE_rwc_chart').getContext('2d');
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+    labelv = JSON.parse({{ ratinglabels | tojson }})
+    datav = JSON.parse({{ SE_rwc | tojson }})
+    console.log(labelv)
+    console.log(datav)
+    let SE_rwc_var = new Chart(SE_rwc_chart, {
+      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels: labelv,
+        datasets:[{
+          label:'No. of employees',
+          data:datav,
+          backgroundColor:[
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)'
+          ],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        scaleShowValues: true,
+        scales: {
+            xaxis:[{
+                ticks:{
+                    autoskip:false
+                }
+            }]
+        },
+        title:{
+          display:true,
+          text:'END-YEAR',
+          fontSize:25
+        },
+
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+    
+    let SE_rwg_chart = document.getElementById('SE_rwg_chart').getContext('2d');
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+    labelv = JSON.parse({{ ratinglabels | tojson }})
+    datav = JSON.parse({{ SE_rwg | tojson }})
+    console.log(labelv)
+    console.log(datav)
+    let SE_rwg_var = new Chart(SE_rwg_chart, {
+      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels: labelv,
+        datasets:[{
+          label:'Average git count',
+          data:datav,
+          backgroundColor:[
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)'
+          ],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        scaleShowValues: true,
+        scales: {
+            xaxis:[{
+                ticks:{
+                    autoskip:false
+                    
+                }
+            }],
+             yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+        },
+        title:{
+          display:true,
+          text:'RATING WISE',
+          fontSize:25
+        },
+
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+
+    let SSE_rwc_chart = document.getElementById('SSE_rwc_chart').getContext('2d');
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+    labelv = JSON.parse({{ ratinglabels | tojson }})
+    datav = JSON.parse({{ SSE_rwc | tojson }})
+    console.log(labelv)
+    console.log(datav)
+    let SSE_rwc_var = new Chart(SSE_rwc_chart, {
+      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels: labelv,
+        datasets:[{
+          label:'No. of employees',
+          data:datav,
+          backgroundColor:[
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)'
+          ],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        scaleShowValues: true,
+        scales: {
+            xaxis:[{
+                ticks:{
+                    autoskip:false
+                }
+            }]
+        },
+        title:{
+          display:true,
+          text:'END-YEAR',
+          fontSize:25
+        },
+
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+    
+    let SSE_rwg_chart = document.getElementById('SSE_rwg_chart').getContext('2d');
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+    labelv = JSON.parse({{ ratinglabels | tojson }})
+    datav = JSON.parse({{ SSE_rwg | tojson }})
+    console.log(labelv)
+    console.log(datav)
+    let SSE_rwg_var = new Chart(SSE_rwg_chart, {
+      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels: labelv,
+        datasets:[{
+          label:'Average git count',
+          data:datav,
+          backgroundColor:[
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)'
+          ],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        scaleShowValues: true,
+        scales: {
+            xaxis:[{
+                ticks:{
+                    autoskip:false
+                    
+                }
+            }],
+             yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+        },
+        title:{
+          display:true,
+          text:'RATING WISE',
+          fontSize:25
+        },
+
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+
+    let SES_rwc_chart = document.getElementById('SES_rwc_chart').getContext('2d');
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+    labelv = JSON.parse({{ ratinglabels | tojson }})
+    datav = JSON.parse({{ SES_rwc | tojson }})
+    console.log(labelv)
+    console.log(datav)
+    let SES_rwc_var = new Chart(SES_rwc_chart, {
+      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels: labelv,
+        datasets:[{
+          label:'No. of employees',
+          data:datav,
+          backgroundColor:[
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)'
+          ],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        scaleShowValues: true,
+        scales: {
+            xaxis:[{
+                ticks:{
+                    autoskip:false
+                }
+            }]
+        },
+        title:{
+          display:true,
+          text:'END-YEAR',
+          fontSize:25
+        },
+
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+    
+    let SES_rwg_chart = document.getElementById('SES_rwg_chart').getContext('2d');
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+    labelv = JSON.parse({{ ratinglabels | tojson }})
+    datav = JSON.parse({{ SES_rwg | tojson }})
+    console.log(labelv)
+    console.log(datav)
+    let SES_rwg_var = new Chart(SES_rwg_chart, {
+      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels: labelv,
+        datasets:[{
+          label:'Average git count',
+          data:datav,
+          backgroundColor:[
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)'
+          ],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        scaleShowValues: true,
+        scales: {
+            xaxis:[{
+                ticks:{
+                    autoskip:false
+                    
+                }
+            }],
+             yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+        },
+        title:{
+          display:true,
+          text:'RATING WISE',
+          fontSize:25
+        },
+
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+
+
+    let SESS_rwc_chart = document.getElementById('SESS_rwc_chart').getContext('2d');
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+    labelv = JSON.parse({{ ratinglabels | tojson }})
+    datav = JSON.parse({{ SESS_rwc | tojson }})
+    console.log(labelv)
+    console.log(datav)
+    let SESS_rwc_var = new Chart(SESS_rwc_chart, {
+      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels: labelv,
+        datasets:[{
+          label:'No. of employees',
+          data:datav,
+          backgroundColor:[
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)'
+          ],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        scaleShowValues: true,
+        scales: {
+            xaxis:[{
+                ticks:{
+                    autoskip:false
+                }
+            }]
+        },
+        title:{
+          display:true,
+          text:'END-YEAR',
+          fontSize:25
+        },
+
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+    
+    let SESS_rwg_chart = document.getElementById('SESS_rwg_chart').getContext('2d');
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+    labelv = JSON.parse({{ ratinglabels | tojson }})
+    datav = JSON.parse({{ SESS_rwg | tojson }})
+    console.log(labelv)
+    console.log(datav)
+    let SESS_rwg_var = new Chart(SESS_rwg_chart, {
+      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels: labelv,
+        datasets:[{
+          label:'Average git count',
+          data:datav,
+          backgroundColor:[
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)'
+          ],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        scaleShowValues: true,
+        scales: {
+            xaxis:[{
+                ticks:{
+                    autoskip:false
+                    
+                }
+            }],
+             yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+        },
+        title:{
+          display:true,
+          text:'RATING WISE',
+          fontSize:25
+        },
+
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+
+    function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+var stIsIE = /*@cc_on!@*/false;
+
+sorttable = {
+init: function() {
+// quit if this function has already been called
+if (arguments.callee.done) return;
+// flag this function so we don't do the same thing twice
+arguments.callee.done = true;
+// kill the timer
+if (_timer) clearInterval(_timer);
+
+if (!document.createElement || !document.getElementsByTagName) return;
+
+sorttable.DATE_RE = /^(\d\d?)[\/\.-](\d\d?)[\/\.-]((\d\d)?\d\d)$/;
+
+forEach(document.getElementsByTagName('table'), function(table) {
+  if (table.className.search(/\bsortable\b/) != -1) {
+    sorttable.makeSortable(table);
+  }
+});
+
+},
+
+makeSortable: function(table) {
+if (table.getElementsByTagName('thead').length == 0) {
+  // table doesn't have a tHead. Since it should have, create one and
+  // put the first table row in it.
+  the = document.createElement('thead');
+  the.appendChild(table.rows[0]);
+  table.insertBefore(the,table.firstChild);
+}
+// Safari doesn't support table.tHead, sigh
+if (table.tHead == null) table.tHead = table.getElementsByTagName('thead')[0];
+
+if (table.tHead.rows.length != 1) return; // can't cope with two header rows
+
+// Sorttable v1 put rows with a class of "sortbottom" at the bottom (as
+// "total" rows, for example). This is B&R, since what you're supposed
+// to do is put them in a tfoot. So, if there are sortbottom rows,
+// for backwards compatibility, move them to tfoot (creating it if needed).
+sortbottomrows = [];
+for (var i=0; i<table.rows.length; i++) {
+  if (table.rows[i].className.search(/\bsortbottom\b/) != -1) {
+    sortbottomrows[sortbottomrows.length] = table.rows[i];
+  }
+}
+if (sortbottomrows) {
+  if (table.tFoot == null) {
+    // table doesn't have a tfoot. Create one.
+    tfo = document.createElement('tfoot');
+    table.appendChild(tfo);
+  }
+  for (var i=0; i<sortbottomrows.length; i++) {
+    tfo.appendChild(sortbottomrows[i]);
+  }
+  delete sortbottomrows;
+}
+
+// work through each column and calculate its type
+headrow = table.tHead.rows[0].cells;
+for (var i=0; i<headrow.length; i++) {
+  // manually override the type with a sorttable_type attribute
+  if (!headrow[i].className.match(/\bsorttable_nosort\b/)) { // skip this col
+    mtch = headrow[i].className.match(/\bsorttable_([a-z0-9]+)\b/);
+    if (mtch) { override = mtch[1]; }
+      if (mtch && typeof sorttable["sort_"+override] == 'function') {
+        headrow[i].sorttable_sortfunction = sorttable["sort_"+override];
+      } else {
+        headrow[i].sorttable_sortfunction = sorttable.guessType(table,i);
+      }
+      // make it clickable to sort
+      headrow[i].sorttable_columnindex = i;
+      headrow[i].sorttable_tbody = table.tBodies[0];
+      dean_addEvent(headrow[i],"click", sorttable.innerSortFunction = function(e) {
+
+      if (this.className.search(/\bsorttable_sorted\b/) != -1) {
+        // if we're already sorted by this column, just
+        // reverse the table, which is quicker
+        sorttable.reverse(this.sorttable_tbody);
+        this.className = this.className.replace('sorttable_sorted',
+                                                'sorttable_sorted_reverse');
+        this.removeChild(document.getElementById('sorttable_sortfwdind'));
+        sortrevind = document.createElement('span');
+        sortrevind.id = "sorttable_sortrevind";
+        sortrevind.innerHTML = stIsIE ? '&nbsp<font face="webdings">5</font>' : '&nbsp;&#x25B4;';
+        this.appendChild(sortrevind);
+        return;
+      }
+      if (this.className.search(/\bsorttable_sorted_reverse\b/) != -1) {
+        // if we're already sorted by this column in reverse, just
+        // re-reverse the table, which is quicker
+        sorttable.reverse(this.sorttable_tbody);
+        this.className = this.className.replace('sorttable_sorted_reverse',
+                                                'sorttable_sorted');
+        this.removeChild(document.getElementById('sorttable_sortrevind'));
+        sortfwdind = document.createElement('span');
+        sortfwdind.id = "sorttable_sortfwdind";
+        sortfwdind.innerHTML = stIsIE ? '&nbsp<font face="webdings">6</font>' : '&nbsp;&#x25BE;';
+        this.appendChild(sortfwdind);
+        return;
+      }
+
+      // remove sorttable_sorted classes
+      theadrow = this.parentNode;
+      forEach(theadrow.childNodes, function(cell) {
+        if (cell.nodeType == 1) { // an element
+          cell.className = cell.className.replace('sorttable_sorted_reverse','');
+          cell.className = cell.className.replace('sorttable_sorted','');
+        }
+      });
+      sortfwdind = document.getElementById('sorttable_sortfwdind');
+      if (sortfwdind) { sortfwdind.parentNode.removeChild(sortfwdind); }
+      sortrevind = document.getElementById('sorttable_sortrevind');
+      if (sortrevind) { sortrevind.parentNode.removeChild(sortrevind); }
+
+      this.className += ' sorttable_sorted';
+      sortfwdind = document.createElement('span');
+      sortfwdind.id = "sorttable_sortfwdind";
+      sortfwdind.innerHTML = stIsIE ? '&nbsp<font face="webdings">6</font>' : '&nbsp;&#x25BE;';
+      this.appendChild(sortfwdind);
+
+        // build an array to sort. This is a Schwartzian transform thing,
+        // i.e., we "decorate" each row with the actual sort key,
+        // sort based on the sort keys, and then put the rows back in order
+        // which is a lot faster because you only do getInnerText once per row
+        row_array = [];
+        col = this.sorttable_columnindex;
+        rows = this.sorttable_tbody.rows;
+        for (var j=0; j<rows.length; j++) {
+          row_array[row_array.length] = [sorttable.getInnerText(rows[j].cells[col]), rows[j]];
+        }
+        /* If you want a stable sort, uncomment the following line */
+        //sorttable.shaker_sort(row_array, this.sorttable_sortfunction);
+        /* and comment out this one */
+        row_array.sort(this.sorttable_sortfunction);
+
+        tb = this.sorttable_tbody;
+        for (var j=0; j<row_array.length; j++) {
+          tb.appendChild(row_array[j][1]);
+        }
+
+        delete row_array;
+      });
+    }
+}
+},
+
+guessType: function(table, column) {
+// guess the type of a column based on its first non-blank row
+sortfn = sorttable.sort_alpha;
+for (var i=0; i<table.tBodies[0].rows.length; i++) {
+  text = sorttable.getInnerText(table.tBodies[0].rows[i].cells[column]);
+  if (text != '') {
+    if (text.match(/^-?[£$¤]?[\d,.]+%?$/)) {
+      return sorttable.sort_numeric;
+    }
+    // check for a date: dd/mm/yyyy or dd/mm/yy
+    // can have / or . or - as separator
+    // can be mm/dd as well
+    possdate = text.match(sorttable.DATE_RE)
+    if (possdate) {
+      // looks like a date
+      first = parseInt(possdate[1]);
+      second = parseInt(possdate[2]);
+      if (first > 12) {
+        // definitely dd/mm
+        return sorttable.sort_ddmm;
+      } else if (second > 12) {
+        return sorttable.sort_mmdd;
+      } else {
+        // looks like a date, but we can't tell which, so assume
+        // that it's dd/mm (English imperialism!) and keep looking
+        sortfn = sorttable.sort_ddmm;
+      }
+    }
+  }
+}
+return sortfn;
+},
+
+getInnerText: function(node) {
+// gets the text we want to use for sorting for a cell.
+// strips leading and trailing whitespace.
+// this is *not* a generic getInnerText function; it's special to sorttable.
+// for example, you can override the cell text with a customkey attribute.
+// it also gets .value for <input> fields.
+
+if (!node) return "";
+
+hasInputs = (typeof node.getElementsByTagName == 'function') &&
+             node.getElementsByTagName('input').length;
+
+if (node.getAttribute("sorttable_customkey") != null) {
+  return node.getAttribute("sorttable_customkey");
+}
+else if (typeof node.textContent != 'undefined' && !hasInputs) {
+  return node.textContent.replace(/^\s+|\s+$/g, '');
+}
+else if (typeof node.innerText != 'undefined' && !hasInputs) {
+  return node.innerText.replace(/^\s+|\s+$/g, '');
+}
+else if (typeof node.text != 'undefined' && !hasInputs) {
+  return node.text.replace(/^\s+|\s+$/g, '');
+}
+else {
+  switch (node.nodeType) {
+    case 3:
+      if (node.nodeName.toLowerCase() == 'input') {
+        return node.value.replace(/^\s+|\s+$/g, '');
+      }
+    case 4:
+      return node.nodeValue.replace(/^\s+|\s+$/g, '');
+      break;
+    case 1:
+    case 11:
+      var innerText = '';
+      for (var i = 0; i < node.childNodes.length; i++) {
+        innerText += sorttable.getInnerText(node.childNodes[i]);
+      }
+      return innerText.replace(/^\s+|\s+$/g, '');
+      break;
+    default:
+      return '';
+  }
+}
+},
+
+reverse: function(tbody) {
+// reverse the rows in a tbody
+newrows = [];
+for (var i=0; i<tbody.rows.length; i++) {
+  newrows[newrows.length] = tbody.rows[i];
+}
+for (var i=newrows.length-1; i>=0; i--) {
+   tbody.appendChild(newrows[i]);
+}
+delete newrows;
+},
+
+/* sort functions
+ each sort function takes two parameters, a and b
+ you are comparing a[0] and b[0] */
+sort_numeric: function(a,b) {
+aa = parseFloat(a[0].replace(/[^0-9.-]/g,''));
+if (isNaN(aa)) aa = 0;
+bb = parseFloat(b[0].replace(/[^0-9.-]/g,''));
+if (isNaN(bb)) bb = 0;
+return aa-bb;
+},
+sort_alpha: function(a,b) {
+if (a[0]==b[0]) return 0;
+if (a[0]<b[0]) return -1;
+return 1;
+},
+sort_ddmm: function(a,b) {
+mtch = a[0].match(sorttable.DATE_RE);
+y = mtch[3]; m = mtch[2]; d = mtch[1];
+if (m.length == 1) m = '0'+m;
+if (d.length == 1) d = '0'+d;
+dt1 = y+m+d;
+mtch = b[0].match(sorttable.DATE_RE);
+y = mtch[3]; m = mtch[2]; d = mtch[1];
+if (m.length == 1) m = '0'+m;
+if (d.length == 1) d = '0'+d;
+dt2 = y+m+d;
+if (dt1==dt2) return 0;
+if (dt1<dt2) return -1;
+return 1;
+},
+sort_mmdd: function(a,b) {
+mtch = a[0].match(sorttable.DATE_RE);
+y = mtch[3]; d = mtch[2]; m = mtch[1];
+if (m.length == 1) m = '0'+m;
+if (d.length == 1) d = '0'+d;
+dt1 = y+m+d;
+mtch = b[0].match(sorttable.DATE_RE);
+y = mtch[3]; d = mtch[2]; m = mtch[1];
+if (m.length == 1) m = '0'+m;
+if (d.length == 1) d = '0'+d;
+dt2 = y+m+d;
+if (dt1==dt2) return 0;
+if (dt1<dt2) return -1;
+return 1;
+},
+
+shaker_sort: function(list, comp_func) {
+// A stable sort function to allow multi-level sorting of data
+// see: http://en.wikipedia.org/wiki/Cocktail_sort
+// thanks to Joseph Nahmias
+var b = 0;
+var t = list.length - 1;
+var swap = true;
+
+while(swap) {
+    swap = false;
+    for(var i = b; i < t; ++i) {
+        if ( comp_func(list[i], list[i+1]) > 0 ) {
+            var q = list[i]; list[i] = list[i+1]; list[i+1] = q;
+            swap = true;
+        }
+    } // for
+    t--;
+
+    if (!swap) break;
+
+    for(var i = t; i > b; --i) {
+        if ( comp_func(list[i], list[i-1]) < 0 ) {
+            var q = list[i]; list[i] = list[i-1]; list[i-1] = q;
+            swap = true;
+        }
+    } // for
+    b++;
+
+} // while(swap)
+}
+}
+
+/* ******************************************************************
+Supporting functions: bundled here to avoid depending on a library
+****************************************************************** */
+
+// Dean Edwards/Matthias Miller/John Resig
+
+/* for Mozilla/Opera9 */
+if (document.addEventListener) {
+document.addEventListener("DOMContentLoaded", sorttable.init, false);
+}
+
+/* for Internet Explorer */
+/*@cc_on @*/
+/*@if (@_win32)
+document.write("<script id=__ie_onload defer src=javascript:void(0)><\/script>");
+var script = document.getElementById("__ie_onload");
+script.onreadystatechange = function() {
+    if (this.readyState == "complete") {
+        sorttable.init(); // call the onload handler
+    }
+};
+/*@end @*/
+
+/* for Safari */
+if (/WebKit/i.test(navigator.userAgent)) { // sniff
+var _timer = setInterval(function() {
+    if (/loaded|complete/.test(document.readyState)) {
+        sorttable.init(); // call the onload handler
+    }
+}, 10);
+}
+
+/* for other browsers */
+window.onload = sorttable.init;
+
+// written by Dean Edwards, 2005
+// with input from Tino Zijdel, Matthias Miller, Diego Perini
+
+// http://dean.edwards.name/weblog/2005/10/add-event/
+
+function dean_addEvent(element, type, handler) {
+if (element.addEventListener) {
+    element.addEventListener(type, handler, false);
+} else {
+    // assign each event handler a unique ID
+    if (!handler.$$guid) handler.$$guid = dean_addEvent.guid++;
+    // create a hash table of event types for the element
+    if (!element.events) element.events = {};
+    // create a hash table of event handlers for each element/event pair
+    var handlers = element.events[type];
+    if (!handlers) {
+        handlers = element.events[type] = {};
+        // store the existing event handler (if there is one)
+        if (element["on" + type]) {
+            handlers[0] = element["on" + type];
+        }
+    }
+    // store the event handler in the hash table
+    handlers[handler.$$guid] = handler;
+    // assign a global event handler to do all the work
+    element["on" + type] = handleEvent;
+}
+};
+// a counter used to create unique IDs
+dean_addEvent.guid = 1;
+
+function removeEvent(element, type, handler) {
+if (element.removeEventListener) {
+    element.removeEventListener(type, handler, false);
+} else {
+    // delete the event handler from the hash table
+    if (element.events && element.events[type]) {
+        delete element.events[type][handler.$$guid];
+    }
+}
+};
+
+function handleEvent(event) {
+var returnValue = true;
+// grab the event object (IE uses a global event object)
+event = event || fixEvent(((this.ownerDocument || this.document || this).parentWindow || window).event);
+// get a reference to the hash table of event handlers
+var handlers = this.events[event.type];
+// execute each event handler
+for (var i in handlers) {
+    this.$$handleEvent = handlers[i];
+    if (this.$$handleEvent(event) === false) {
+        returnValue = false;
+    }
+}
+return returnValue;
+};
+
+function fixEvent(event) {
+// add W3C standard event methods
+event.preventDefault = fixEvent.preventDefault;
+event.stopPropagation = fixEvent.stopPropagation;
+return event;
+};
+fixEvent.preventDefault = function() {
+this.returnValue = false;
+};
+fixEvent.stopPropagation = function() {
+this.cancelBubble = true;
+}
+
+// Dean's forEach: http://dean.edwards.name/base/forEach.js
+/*
+forEach, version 1.0
+Copyright 2006, Dean Edwards
+License: https://www.opensource.org/licenses/mit-license.php
+*/
+
+// array-like enumeration
+if (!Array.forEach) { // mozilla already supports this
+Array.forEach = function(array, block, context) {
+    for (var i = 0; i < array.length; i++) {
+        block.call(context, array[i], i, array);
+    }
+};
+}
+
+// generic enumeration
+Function.prototype.forEach = function(object, block, context) {
+for (var key in object) {
+    if (typeof this.prototype[key] == "undefined") {
+        block.call(context, object[key], key, object);
+    }
+}
+};
+
+// character enumeration
+String.forEach = function(string, block, context) {
+Array.forEach(string.split(""), function(chr, index) {
+    block.call(context, chr, index, string);
+});
+};
+
+// globally resolve forEach enumeration
+var forEach = function(object, block, context) {
+if (object) {
+    var resolve = Object; // default
+    if (object instanceof Function) {
+        // functions have a "length" property
+        resolve = Function;
+    } else if (object.forEach instanceof Function) {
+        // the object implements a custom forEach method so use that
+        object.forEach(block, context);
+        return;
+    } else if (typeof object == "string") {
+        // the object is a string
+        resolve = String;
+    } else if (typeof object.length == "number") {
+        // the object is array-like
+        resolve = Array;
+    }
+    resolve.forEach(object, block, context);
+}
+};
+
+
+
+  </script>
+
+</body>
+</html>
