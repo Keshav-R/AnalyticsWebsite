@@ -8,7 +8,7 @@
 *{
     padding: 0;
     margin: 0;
-    font-family: sans-serif;
+    font-family:"Lucida Console", "Courier New", monospace;
   }
   body{
     background-color: #cf806e;
@@ -28,16 +28,17 @@
   }
   .text1{
     color: rgb(75, 13, 13);
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 500;
-    letter-spacing: 8px;
+
     margin-bottom: 20px;
-    font-family:monospace;
+    font-family:"Lucida Console", "Courier New", monospace;;
     position: relative;
     animation: text 3s 1;
     background: #eee;
     height: auto;
     width: 400px;
+    top:20%;
     left:35%;
   }
   @keyframes text {
@@ -56,39 +57,13 @@
   }
   @import url(https://fonts.googleapis.com/css?family=Lato:400,700,300);
 body {
-  font-family: "Lato", sans-serif;
+  font-family: "Lucida Console", "Courier New", monospace;;
 }
 
 .formcontainer {
   position: absolute;
-  top: 60%;
+  top: 80%;
   left: 35%;
-  -webkit-box-align: center;
-  -moz-box-align: center;
-  box-align: center;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  -ms-align-items: center;
-  -o-align-items: center;
-  align-items: center;
-  -ms-flex-align: center;
-  display: -webkit-box;
-  display: -moz-box;
-  display: box;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -moz-box-pack: center;
-  box-pack: center;
-  -webkit-justify-content: center;
-  -moz-justify-content: center;
-  -ms-justify-content: center;
-  -o-justify-content: center;
-  justify-content: center;
-  -ms-flex-pack: center;
-  
 }
 
 .form {
@@ -106,7 +81,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  background: #fff;
+  background: #eee;
   padding: 10px 15px;
   display: block;
   width: calc(100% - 40px);
@@ -114,10 +89,12 @@ body {
   z-index: 20;
   height: 40px;
   line-height: 40px;
-  color: #999;
+  color: rgb(0, 0, 0);
   border-radius: 5px 10px 10px 5px;
   font-weight: 300;
 }
+
+
 .file-upload-wrapper:before {
   content: "";
   position: absolute;
@@ -159,8 +136,8 @@ body {
 
 
 #btn {
-  top:70%;
-  left:42.5%;
+  top:80%;
+  left:30%;
   background: #550b0b;
   height: 50px;
   min-width: 150px;
@@ -170,7 +147,7 @@ body {
   color: #eee;
   font-size: 16px;
   font-family: "Lucida Console", "Courier New", monospace;;
-  position: relative;
+  position: absolute;
   transition: 1s;
   -webkit-tap-highlight-color: transparent;
   display: flex;
@@ -211,6 +188,15 @@ body {
   height:100px;
   width: 100px;
 }
+.box{
+  border-radius: 25px;
+  background-color: #eee;
+  position:absolute;
+  top:35%;
+  left:30%;
+  height: 40%;
+  width: 40%;
+}
 </style>
 <script>
     $("form").on("change", ".file-upload-field", function(){ 
@@ -222,19 +208,20 @@ body {
 <body>
     <header><img src="../static/wellsfargo.png" class="logo"></header>
     <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
-   
+    <div class = "box"></div>
+    <div class="container">
 
     <div class="formcontainer">
         <form class="form" action = "http://localhost:5000/uploader" method = "POST" 
         enctype = "multipart/form-data">
-          <div class="file-upload-wrapper" data-text="Select your file!">
+          <div class="file-upload-wrapper" data-text="Select your file">
             <input name="file" type="file" class="file-upload-field">
           </div>
           <button type="submit" id="btn" id="cirlce">SUBMIT</button>
         </form>
       </div>
       
-      <div class="container">
+      
         <span class= "text1">PLEASE UPLOAD YOUR FILE:</span>
     </div>
     <footer></footer>
