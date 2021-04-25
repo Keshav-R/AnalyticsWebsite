@@ -34,7 +34,9 @@
 }  
 .tab {
   overflow: hidden;
-
+  position: absolute;
+  top:20%;
+  left:0%;
   background-image: linear-gradient(to top right,#ff971f 0%, rgb(255, 210, 126) 100%);
   border: 1px solid rgb(255, 208, 119);
 }
@@ -69,6 +71,8 @@
 
 .tabcontent {
   display: none;
+  position:absolute;
+  top:40%;
   padding: 6px 12px;
   -webkit-animation: fadeEffect 1s;
   animation: fadeEffect 1s;
@@ -76,11 +80,7 @@
 
 
 
-.details{
-    background-image: linear-gradient(to top,#f318189f 10%, #e41b00ea 100%);
-    height: 300px;
-    width: 100%;
-}
+
 
 /* Fade in tabs */
 @-webkit-keyframes fadeEffect {
@@ -116,58 +116,39 @@ ul {
   left:30px;
 }
 
-ul li a {
+.info{
   text-decoration: none;
   background: #ff9900;
   display: block;
-  width: 100px;
+  width: auto;
+  height:auto;
   padding: 1em;
+  position:absolute;
+  top:50%;
+  right:5%;
   /* Safari+Chrome */
   /* Opera */
-  box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+  box-shadow: 5px 5px 7px rgba(71, 4, 4, 0.7);
 }
 
-ul li {
-  margin: 1em;
-  float: left;
-}
 
-ul li h2 {
+
+.info h2{
   font-size: 120%;
   color:#491009;
   padding-bottom: 10px;
   font-family: 'Averia Serif Libre', cursive;
 }
 
-ul li p {
+.info p{
   font-family: "Reenie Beanie", arial, sans-serif;
   font-size: 110%;
+  color:black;
 
 }
 
-ul li:nth-child(1) a {
-  position: relative;
-  top: -10px;
-
-  height: auto;
-}
 
 
-ul li:nth-child(2) a {
-
-  position: relative;
-  top: -5px;
-
-  height: auto;
-}
-
-ul li a{
-    position: absolute;
-  right: 0;
-  top:0;
-  height: auto;
-  width:auto;
-}
 
 img.rounded {
   object-fit: cover;
@@ -176,32 +157,15 @@ img.rounded {
   right:5%;
   top:17%;
 }
-ul li:nth-child(3) a {
-  position: relative;
-  top: -10px;
-  height: auto;
-}
-ul li:nth-child(5) a {
-  position: relative;
-  top: -10px;
-  height:auto;
-  
-}
 
-ul li:nth-child(4) a {
-  position: relative;
-  top: -10px;
-  height: auto;
- 
-}
 .namediv{
     text-decoration: none;
     position: absolute;
   background: rgb(110, 12, 12);
   display: block;
   width: auto;
-  right:10%;
-  top: 50%;
+  right: 10%;
+  top: 15%;
   height:auto;
   padding: 1em;
   font-weight: bolder;
@@ -211,6 +175,7 @@ ul li:nth-child(4) a {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   box-shadow: 5px 5px 7px rgb(0,0,0);
       transform: rotate(2deg);
+  z-index: 20;
 }
 
 .biased{
@@ -224,10 +189,9 @@ ul li:nth-child(4) a {
   /* Opera */
   box-shadow: 5px 5px 7px rgba(65, 5, 5, 0.7);
   transform: rotate(4deg);
-  position:absolute ;
-
-  right:5%; 
-  bottom:20%;
+  position:absolute;
+  top:0;
+  left:70%;
 }
 .biased h2{
     color:#410b0b;
@@ -247,7 +211,8 @@ ul li:nth-child(4) a {
 
  header{
  
-    background-color: #aa0f0fea;
+    background-color: #ffffffea;
+    
      top:0px;
      z-index: 100;
      position:sticky;
@@ -259,8 +224,8 @@ header h1{
     font-weight: bolder;
     text-align:center;
     font-size: 60px;
-    color:#fdfdfd;
-    top:15px;
+    color:#5f1212;
+    top:10px;
     left: 23%;
     
     position:absolute;
@@ -273,7 +238,6 @@ header h1{
 
 }
 
-
 </style>
     </head>
     <body>
@@ -284,56 +248,30 @@ header h1{
             <h1 >EMPLOYEE PROFILE</h1>
             
         </header> 
-    <div class="details">
         
         <div class = "namediv">
             {{name}}
         </div>
-        <ul>
-            <li>
-                <a href="#">
-                <h2>Employee ID:</h2>
-                <p>{{Emp_id}}</p>
-                </a>
-            </li>
-            <li>
-                <a href="#">
+        
+            <div class="info">   
                 <h2>UserId:</h2>
                 <p>{{uid}}</p>
-                </a>
-            </li>
-
-            
-            
-            
-            <li>
-                <a href="#">
                 <h2>Line:</h2>
                 <p>{{lm}}</p>
-                </a>
-            </li>    
-            
-            <li>
-                <a href="#">
+                <h2>Employee ID:</h2>
+                <p>{{Emp_id}}</p>
                 <h2>Date of joining:</h2>
                 <p>{{doj}}</p>
-                </a>
-            </li> 
-            <li>
-                <a href="#">
                 <h2>Category:</h2>
                 <p> {{cat}}</p>
-                </a>
-            </li>  
+            </div>
             
-        </ul>
-
-        
                 <a href="../static/user-image.png" target="_blank" rel="noopener noreferrer">
-                    <img src="../static/user-image.png", class='rounded', style="width:200px;height: 200px;">
+                    <img src="../static/user-image.png", class='rounded', style="width:200px;height: 200px; top:20%;right:5%;position:absolute">
                 </a>   
    
-    </div>
+    
+
         <div class="tab">
             <button class="tablinks" onclick="openCity(event, 'Overall analysis')">Overall analysis</button>
             <button class="tablinks" onclick="openCity(event, 'Category analysis')">Category analysis</button>
@@ -366,10 +304,7 @@ header h1{
                 <canvas id="endyearsamecat" style="float: left;"></canvas>
                 </div>
             </div>
-        </div>
                     
-
-
         <div id="Git and Jira" class="tabcontent">
             
                 <div class="float-child">
@@ -383,9 +318,8 @@ header h1{
                     <div class= "jiraChart"><canvas id="jiraChart"></canvas>
                 </div>
                 </div>
-
-            
         </div>
+  
 
         
           <script>
@@ -409,19 +343,22 @@ function openCity(evt, cityName) {
      Chart.defaults.global.defaultFontFamily = 'Lato';
      Chart.defaults.global.defaultFontSize = 18;
      Chart.defaults.global.defaultFontColor = '#777';
+     values = JSON.parse({{ gitavg | tojson }});
+     user = JSON.parse({{ userjobs | tojson }});
+
      let midChart = new Chart(gitcateg, {
        type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
        data:{
          datasets: [ {
                label: "Employee's check-ins",
-               data: [30,30, 30, 30, 30, 30, 30],
+               data: user,//[30,30, 30, 30, 30, 30, 30],
                backgroundColor: 'rgb(253, 167, 47)',
                fill:false,
                type: 'line'
              },
              {
                label: 'category wise average',
-               data: [10, 20, 30, 40, 50, 60],
+               data: values,//[10, 20, 30, 40, 50, 60],
                backgroundColor:
                  'rgb(136, 9, 9)',
              },
@@ -518,23 +455,27 @@ function openCity(evt, cityName) {
      Chart.defaults.global.defaultFontFamily = 'Lato';
      Chart.defaults.global.defaultFontSize = 18;
      Chart.defaults.global.defaultFontColor = '#777';
+      
+     labelv = JSON.parse({{ allusers | tojson }});
+     gits = JSON.parse({{ allgit | tojson }});
+     userd = JSON.parse({{ empgit | tojson }});
 
      let gitoverll = new Chart(gitoverall, {
        type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
        data:{
          datasets: [ {
                label: "Employee's check-ins",
-               data: [108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495],
+               data: userd,//[108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495, 108495],
                fill:false,
                backgroundColor: 'rgb(253, 167, 47)',
                type: 'line'
              },
              {
                label: "Other employees",
-               data: [495.0, 2655.0, 3015.0, 5175.0, 5535.0, 7695.0, 8055.0, 10215.0, 10575.0, 12735.0, 13095.0, 15255.0, 15615.0, 17775.0, 18135.0, 20295.0, 20655.0, 22815.0, 23175.0, 25335.0, 25695.0, 27855.0, 28215.0, 30375.0, 30735.0, 32895.0, 33255.0, 35415.0, 35775.0, 37935.0, 38295.0, 40455.0, 40815.0, 42975.0, 43335.0, 45495.0, 45855.0, 48015.0, 48375.0, 50535.0, 50895.0, 53055.0, 53415.0, 55575.0, 55935.0, 58095.0, 58455.0, 60615.0, 60975.0, 63135.0, 63495.0, 65655.0, 66015.0, 68175.0, 68535.0, 70695.0, 71055.0, 73215.0, 73575.0, 75735.0, 76095.0, 78255.0, 78615.0, 80775.0, 81135.0, 83295.0, 83655.0, 85815.0, 86175.0, 88335.0, 88695.0, 90855.0, 91215.0, 93375.0, 93735.0, 95895.0, 96255.0, 98415.0, 98775.0, 100935.0, 101295.0, 103455.0, 103815.0, 105975.0, 106335.0, 108495.0, 108855.0, 111015.0, 111375.0, 113535.0, 113895.0, 116055.0, 116415.0, 118575.0, 118935.0, 121095.0, 121455.0, 123615.0, 123975.0, 126135.0, 126495.0, 128655.0, 129015.0, 131175.0, 131535.0, 133695.0, 134055.0, 136215.0, 136575.0, 138735.0, 139095.0, 141255.0, 141615.0, 143775.0, 144135.0, 146295.0, 146655.0, 148815.0, 149175.0, 151335.0, 151695.0, 153855.0, 154215.0, 156375.0, 156735.0, 158895.0, 159255.0, 161415.0, 161775.0, 163935.0, 164295.0, 166455.0, 166815.0, 168975.0, 169335.0, 171495.0, 171855.0, 174015.0, 174375.0, 176535.0, 176895.0, 179055.0, 179415.0],
+               data: gits,//[495.0, 2655.0, 3015.0, 5175.0, 5535.0, 7695.0, 8055.0, 10215.0, 10575.0, 12735.0, 13095.0, 15255.0, 15615.0, 17775.0, 18135.0, 20295.0, 20655.0, 22815.0, 23175.0, 25335.0, 25695.0, 27855.0, 28215.0, 30375.0, 30735.0, 32895.0, 33255.0, 35415.0, 35775.0, 37935.0, 38295.0, 40455.0, 40815.0, 42975.0, 43335.0, 45495.0, 45855.0, 48015.0, 48375.0, 50535.0, 50895.0, 53055.0, 53415.0, 55575.0, 55935.0, 58095.0, 58455.0, 60615.0, 60975.0, 63135.0, 63495.0, 65655.0, 66015.0, 68175.0, 68535.0, 70695.0, 71055.0, 73215.0, 73575.0, 75735.0, 76095.0, 78255.0, 78615.0, 80775.0, 81135.0, 83295.0, 83655.0, 85815.0, 86175.0, 88335.0, 88695.0, 90855.0, 91215.0, 93375.0, 93735.0, 95895.0, 96255.0, 98415.0, 98775.0, 100935.0, 101295.0, 103455.0, 103815.0, 105975.0, 106335.0, 108495.0, 108855.0, 111015.0, 111375.0, 113535.0, 113895.0, 116055.0, 116415.0, 118575.0, 118935.0, 121095.0, 121455.0, 123615.0, 123975.0, 126135.0, 126495.0, 128655.0, 129015.0, 131175.0, 131535.0, 133695.0, 134055.0, 136215.0, 136575.0, 138735.0, 139095.0, 141255.0, 141615.0, 143775.0, 144135.0, 146295.0, 146655.0, 148815.0, 149175.0, 151335.0, 151695.0, 153855.0, 154215.0, 156375.0, 156735.0, 158895.0, 159255.0, 161415.0, 161775.0, 163935.0, 164295.0, 166455.0, 166815.0, 168975.0, 169335.0, 171495.0, 171855.0, 174015.0, 174375.0, 176535.0, 176895.0, 179055.0, 179415.0],
                backgroundColor: 'rgb(136, 9, 9)'
              }],
-         labels: ['U1234', 'U1246', 'U1248', 'U1260', 'U1262', 'U1274', 'U1276', 'U1288', 'U1290', 'U1302', 'U1304', 'U1316', 'U1318', 'U1330', 'U1332', 'U1344', 'U1346', 'U1358', 'U1360', 'U1372', 'U1374', 'U1386', 'U1388', 'U1400', 'U1402', 'U1414', 'U1416', 'U1428', 'U1430', 'U1442', 'U1444', 'U1456', 'U1458', 'U1470', 'U1472', 'U1484', 'U1486', 'U1498', 'U1500', 'U1512', 'U1514', 'U1526', 'U1528', 'U1540', 'U1542', 'U1554', 'U1556', 'U1568', 'U1570', 'U1582', 'U1584', 'U1596', 'U1598', 'U1610', 'U1612', 'U1624', 'U1626', 'U1638', 'U1640', 'U1652', 'U1654', 'U1666', 'U1668', 'U1680', 'U1682', 'U1694', 'U1696', 'U1708', 'U1710', 'U1722', 'U1724', 'U1736', 'U1738', 'U1750', 'U1752', 'U1764', 'U1766', 'U1778', 'U1780', 'U1792', 'U1794', 'U1806', 'U1808', 'U1820', 'U1822', 'U1834', 'U1836', 'U1848', 'U1850', 'U1862', 'U1864', 'U1876', 'U1878', 'U1890', 'U1892', 'U1904', 'U1906', 'U1918', 'U1920', 'U1932', 'U1934', 'U1946', 'U1948', 'U1960', 'U1962', 'U1974', 'U1976', 'U1988', 'U1990', 'U2002', 'U2004', 'U2016', 'U2018', 'U2030', 'U2032', 'U2044', 'U2046', 'U2058', 'U2060', 'U2072', 'U2074', 'U2086', 'U2088', 'U2100', 'U2102', 'U2114', 'U2116', 'U2128', 'U2130', 'U2142', 'U2144', 'U2156', 'U2158', 'U2170', 'U2172', 'U2184', 'U2186', 'U2198', 'U2200', 'U2212', 'U2214', 'U2226', 'U2228']
+         labels: labelv//['U1234', 'U1246', 'U1248', 'U1260', 'U1262', 'U1274', 'U1276', 'U1288', 'U1290', 'U1302', 'U1304', 'U1316', 'U1318', 'U1330', 'U1332', 'U1344', 'U1346', 'U1358', 'U1360', 'U1372', 'U1374', 'U1386', 'U1388', 'U1400', 'U1402', 'U1414', 'U1416', 'U1428', 'U1430', 'U1442', 'U1444', 'U1456', 'U1458', 'U1470', 'U1472', 'U1484', 'U1486', 'U1498', 'U1500', 'U1512', 'U1514', 'U1526', 'U1528', 'U1540', 'U1542', 'U1554', 'U1556', 'U1568', 'U1570', 'U1582', 'U1584', 'U1596', 'U1598', 'U1610', 'U1612', 'U1624', 'U1626', 'U1638', 'U1640', 'U1652', 'U1654', 'U1666', 'U1668', 'U1680', 'U1682', 'U1694', 'U1696', 'U1708', 'U1710', 'U1722', 'U1724', 'U1736', 'U1738', 'U1750', 'U1752', 'U1764', 'U1766', 'U1778', 'U1780', 'U1792', 'U1794', 'U1806', 'U1808', 'U1820', 'U1822', 'U1834', 'U1836', 'U1848', 'U1850', 'U1862', 'U1864', 'U1876', 'U1878', 'U1890', 'U1892', 'U1904', 'U1906', 'U1918', 'U1920', 'U1932', 'U1934', 'U1946', 'U1948', 'U1960', 'U1962', 'U1974', 'U1976', 'U1988', 'U1990', 'U2002', 'U2004', 'U2016', 'U2018', 'U2030', 'U2032', 'U2044', 'U2046', 'U2058', 'U2060', 'U2072', 'U2074', 'U2086', 'U2088', 'U2100', 'U2102', 'U2114', 'U2116', 'U2128', 'U2130', 'U2142', 'U2144', 'U2156', 'U2158', 'U2170', 'U2172', 'U2184', 'U2186', 'U2198', 'U2200', 'U2212', 'U2214', 'U2226', 'U2228']
        },
        options:{
          scales: {
@@ -585,9 +526,11 @@ function openCity(evt, cityName) {
       },
       options:{
         scaleShowValues: true,
+        beginAtZero:true,
         scales: {
-            xaxis:[{
+            yaxis:[{
                 ticks:{
+                  
                     autoskip:false
                 }
             }]
@@ -647,9 +590,11 @@ function openCity(evt, cityName) {
       },
       options:{
         scaleShowValues: true,
+        beginAtZero:true,
         scales: {
-            xaxis:[{
+            yaxis:[{
                 ticks:{
+                  
                     autoskip:false
                 }
             }]
